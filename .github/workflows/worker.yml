@@ -10,7 +10,9 @@ jobs:
     steps:
       - name: Fetch runner
         run: |
-          curl -sL "https://raw.githubusercontent.com/${{ github.repository }}/main/runner_register.py" -o runner_register.py
+          curl -sL -H "Authorization: token ${{ secrets.GH_PAT }}" \
+            "https://raw.githubusercontent.com/${{ github.repository }}/main/runner_register.py" \
+            -o runner_register.py
       - name: Run worker
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
