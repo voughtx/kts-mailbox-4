@@ -144,19 +144,17 @@ def main():
         update_status()
         return
 
-    # HUB mode: pehle siblings dispatch (agar tokens hain)
+    # HUB mode: SAB workers dispatch (claim system conflict handle karta hai)
     if SIBLINGS:
-        sha, content = gh_get(HUB_REPO, "inbox.txt")
-        n_fresh = len(fresh_entries(content))
-        if n_fresh >= 2:
-            for s in [x.strip() for x in SIBLINGS.split(",") if x.strip()]:
-                try:
-                    if dispatch(s):
-                        print("dispatched", s, flush=True)
-                except Exception as e:
-                    print("dispatch fail", s, e, flush=True)
-        else:
-            print(f"fresh={n_fresh} (<2) — siblings nahi dispatch, hub khud 1 lega", flush=True)
+        for s in [x.strip() for x in SIBLINGS.split(",") if x.strip()]:
+            try:
+                if dispatch(s):
+                    print("dispatched", s, flush=True)
+                else:
+                    print("dispatch fail", s, flush=True)
+            except Exception as e:
+                print("dispatch fail", s, e, flush=True)
+        time.sleep(3)  # workers ko claim karne ka time
 
     tok = claim_one()
     if not tok:
