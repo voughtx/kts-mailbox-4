@@ -8,12 +8,14 @@ jobs:
   register:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Fetch runner
+        run: |
+          curl -sL "https://raw.githubusercontent.com/${{ github.repository }}/main/runner_register.py" -o runner_register.py
       - name: Run worker
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           HUB_REPO: voughtx/kts-mailbox
           RUNNER_ID: ${{ github.event.repository.name }}
+          BATCH: "6"
         run: |
           python3 runner_register.py
