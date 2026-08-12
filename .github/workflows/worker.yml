@@ -1,0 +1,19 @@
+name: KTS Register (worker)
+
+on:
+  repository_dispatch:
+    types: [register]
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run worker
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          HUB_REPO: voughtx/kts-mailbox
+          RUNNER_ID: ${{ github.event.repository.name }}
+        run: |
+          python3 runner_register.py
