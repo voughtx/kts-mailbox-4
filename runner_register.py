@@ -75,21 +75,25 @@ def fresh_entries(content):
     out.sort(reverse=True)   # naya pehle
     return out
 
-def claim_one():
-    """Atomic claim: latest fresh token ko inbox se hatao. 409 pe retry.
-    Jo pehle hata lega, wahi token use karega — same token 2 repo kabhi nahi."""
-    for _ in range(8):
+BATCH = int(os.environ.get("BATCH", "6"))   # ek run me kitne tokens tak
+
+def claim_many():
+    """Batch claim: inbox se max BATCH fresh tokens atomic hata ke lao.
+    Jo pehle hata lega, wahi use karega — same token 2 repo kabhi nahi."""
+    for _ in range(10):
         sha, content = gh_get(HUB_REPO, "inbox.txt")
         entries = fresh_entries(content)
         if not entries:
-            return None
-        ep, tok = entries[0]
-        keep = [l for l in content.splitlines() if l.strip() and tok not in l]
+            return []
+        take = entries[:BATCH]
+        remove_toks = [t for _, t in take]
+        keep = [l for l in content.splitlines() if l.strip()
+                and not any(t in l for t in remove_toks)]
         new_c = "\n".join(keep) + ("\n" if keep else "")
         if gh_put(HUB_REPO, "inbox.txt", new_c, sha):
-            return tok
+            return [t for _, t in take]
         time.sleep(1.2)
-    return None
+    return []
 
 def register(tok):
     username = "u" + "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
@@ -156,18 +160,23 @@ def main():
                 print("dispatch fail", s, e, flush=True)
         time.sleep(3)  # workers ko claim karne ka time
 
-    tok = claim_one()
-    if not tok:
+    toks = claim_many()
+    if not toks:
         print("no fresh token — done", flush=True)
         return
-    print("claimed token (", len(tok), "chars )", flush=True)
-    acc, err = register(tok)
-    if err or not acc or not acc.get("jwt"):
-        print("FAIL:", (err or "no jwt")[:120], flush=True)
-        return
-    print("✅", acc["username"], flush=True)
-    append_outbox(acc)
+    print("claimed", len(toks), "tokens — batch me register kar raha hoon", flush=True)
+    made = 0
+    for tok in toks:
+        acc, err = register(tok)
+        if err or not acc or not acc.get("jwt"):
+            print("  FAIL:", (err or "no jwt")[:100], flush=True)
+            continue
+        print("  ✅", acc["username"], flush=True)
+        append_outbox(acc)
+        made += 1
+        time.sleep(1.5)
     update_status()
+    print(f"batch done: {made}/{len(toks)} JWT", flush=True)
 
 if __name__ == "__main__":
     main()
