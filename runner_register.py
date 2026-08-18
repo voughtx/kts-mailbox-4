@@ -8,6 +8,7 @@ import json, os, random, string, time, urllib.request, urllib.error, base64
 TOKEN = os.environ.get("TOKEN", "")          # manual mode
 GH_PAT = os.environ.get("GH_PAT", "")
 HUB_REPO = os.environ.get("HUB_REPO", "voughtx/kts-mailbox")
+PRIVATE_REPO = os.environ.get("PRIVATE_REPO", "voughtx/Jts-Brain")  # JWT yahan (private) save
 SIBLINGS = os.environ.get("SIBLINGS", "")    # comma list — sirf hub mode
 RUNNER_ID = os.environ.get("RUNNER_ID", "runner")
 MAX_AGE = 240
@@ -114,22 +115,30 @@ def register(tok):
         return None, f"HTTP {e.code}: {e.read().decode()[:150]}"
 
 def append_outbox(acc):
+    """Naya JWT PRIVATE repo me date-wise file me save (kabhi public nahi).
+    File: tokenhive/tokens_YYYY-MM-DD.txt (har din alag file)."""
     rec = f"\n===\nusername: {acc['username']}\npassword: {acc['password']}\nemail: {acc['email']}\njwt: {acc['jwt']}\nsource: {RUNNER_ID}\n"
+    datefile = "tokenhive/tokens_" + time.strftime("%Y-%m-%d", time.gmtime()) + ".txt"
     for _ in range(5):
-        sha, old = gh_get(HUB_REPO, "runner_outbox.txt")
-        if gh_put(HUB_REPO, "runner_outbox.txt", (old + rec).strip() + "\n", sha):
+        try:
+            sha, old = gh_get(PRIVATE_REPO, datefile)
+        except Exception:
+            sha, old = None, ""
+        if gh_put(PRIVATE_REPO, datefile, (old + rec).strip() + "\n", sha):
             return True
         time.sleep(1.2)
     return False
 
 def update_status():
     try:
-        _, oc = gh_get(HUB_REPO, "runner_outbox.txt")
+        # status bhi private repo me (public me count bhi mat dikhao)
+        statusfile = "tokenhive/runner_status.txt"
+        _, oc = gh_get(PRIVATE_REPO, statusfile)
         n = oc.count("username:")
         text = f"last_run: {time.strftime('%Y-%m-%dT%H:%MZ', time.gmtime())}\ntotal_jwts: {n}"
         for _ in range(4):
-            sha, _ = gh_get(HUB_REPO, "runner_status.txt")
-            if gh_put(HUB_REPO, "runner_status.txt", text, sha):
+            sha, _ = gh_get(PRIVATE_REPO, statusfile)
+            if gh_put(PRIVATE_REPO, statusfile, text, sha):
                 break
             time.sleep(1)
     except Exception as e:
