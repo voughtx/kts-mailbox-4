@@ -1,4 +1,4 @@
-name: KTS Register (worker)
+name: Register (worker)
 
 on:
   repository_dispatch:
